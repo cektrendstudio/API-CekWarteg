@@ -4,7 +4,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>List Of User</h1>
+    <h1>List Of Warteg</h1>
 @stop
 
 @section('content')
