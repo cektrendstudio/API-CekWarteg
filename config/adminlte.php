@@ -254,33 +254,33 @@ return [
         ['header' => 'USERS'],
         [
             'text' => 'Data User',
-            'url'  => 'home/user',
+            'url'  => 'user',
             'icon' => 'fas fa-users',
         ],
         [
             'text' => 'Tambah User',
-            'url'  => 'home/user/create',
+            'url'  => 'user/create',
             'icon' => 'fas fa-user-plus',
         ],
         ['header' => 'WARTEG'],
         [
             'text' => 'Data Warteg',
-            'url'  => 'home/warteg',
+            'url'  => 'warteg',
             'icon' => 'fas fa-store',
         ],
         [
             'text' => 'Tambah Warteg',
-            'url'  => 'home/warteg/create',
+            'url'  => 'warteg/create',
             'icon' => 'fas fa-plus-circle',
         ],
         [
             'text' => 'Menu Warteg',
-            'url'  => 'home/menu',
+            'url'  => 'menu',
             'icon' => 'fas fa-sticky-note',
         ],
         [
             'text' => 'Tambah Menu Warteg',
-            'url'  => 'home/menu/create',
+            'url'  => 'menu/create',
             'icon' => 'fas fa-copy',
         ],
 
