@@ -44,7 +44,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::where('id', $id)->first();
-        $user->delete();
+        $user->is_active = false;
+        $user->save();
 
         return redirect()->route('user.index');
     }
