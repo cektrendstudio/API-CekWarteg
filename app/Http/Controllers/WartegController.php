@@ -14,15 +14,20 @@ class WartegController extends Controller
     }
 
     public function index(){
-
+        $warteg = Warteg::where('is_active', true)->get();
+        return view('warteg.index', compact('warteg'));
     }
 
     public function edit($id){
-
+        $warteg = Warteg::where('id', $id)->where('is_active', true)->first();
     }
 
     public function destroy($id){
+        $warteg = Warteg::where('id', $id)->first();
+        $warteg->is_active = false;
+        $warteg->save();
 
+        return redirect()->route('warteg.index');
     }
 
     public function show($id){
@@ -55,6 +60,6 @@ class WartegController extends Controller
         $warteg->photo_profile =  $request->file('photo')->store('wartegs', 'public');
         $warteg->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('warteg.index');
     }
 }
