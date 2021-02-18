@@ -17,9 +17,7 @@ class CreateWartegsTable extends Migration
             $table->bigIncrements('id');
             $table->string('code')->unique();
             $table->string('name');
-            $table->string('company_name');
             $table->string('owner_name');
-            $table->string('company');
             $table->text('address');
             $table->string('phone', 20);
             $table->text('description');
