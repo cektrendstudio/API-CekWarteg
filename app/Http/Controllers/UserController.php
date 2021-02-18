@@ -32,7 +32,7 @@ class UserController extends Controller
      * @return View
      */
     public function edit($id){
-        $user = User::where('id',$id)->first();
+        $user = User::where('id',$id)->where('is_active', true)->first();
         return view('user.edit', compact('user'));
 
     }
