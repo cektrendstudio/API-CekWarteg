@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/warteg',[WartegApiController::class, 'index']);
 Route::post('/warteg/create',[WartegApiController::class, 'create']);
+Route::get('/warteg/{id}',[WartegApiController::class, 'show']);
+Route::post('/warteg/{id}/update',[WartegApiController::class, 'update']);
