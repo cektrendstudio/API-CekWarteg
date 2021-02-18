@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Cekwarteg - Login',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,12 +45,13 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Cekwarteg</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'Cekwarteg',
+    'logo_img_title' => 'Cekwarteg',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,11 +66,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -235,11 +236,9 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Dashboard',
+            'url'         => '/home',
+            'icon'        => 'fas fa-fw fa-home',
         ],
         ['header' => 'account_settings'],
         [
@@ -252,60 +251,39 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        ['header' => 'USERS'],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'text' => 'Data User',
+            'url'  => 'home/user',
+            'icon' => 'fas fa-users',
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text' => 'Tambah User',
+            'url'  => 'home/user/create',
+            'icon' => 'fas fa-user-plus',
+        ],
+        ['header' => 'WARTEG'],
+        [
+            'text' => 'Data Warteg',
+            'url'  => 'home/warteg',
+            'icon' => 'fas fa-store',
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'text' => 'Tambah Warteg',
+            'url'  => 'home/warteg/create',
+            'icon' => 'fas fa-plus-circle',
         ],
+        [
+            'text' => 'Menu Warteg',
+            'url'  => 'home/menu',
+            'icon' => 'fas fa-sticky-note',
+        ],
+        [
+            'text' => 'Tambah Menu Warteg',
+            'url'  => 'home/menu/create',
+            'icon' => 'fas fa-copy',
+        ],
+
     ],
 
     /*
