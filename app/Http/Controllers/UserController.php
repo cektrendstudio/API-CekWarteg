@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = User::all();
+        $user = User::where('is_active', true)->get();
         return view('user.index', compact('user'));
     }
 
