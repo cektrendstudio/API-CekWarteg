@@ -17,9 +17,12 @@ class CreateMenusTable extends Migration
             $table->bigIncrements('id');
             $table->string('code')->unique();
             $table->string('name');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('warteg_id');
             $table->unsignedInteger('price');
             $table->boolean('is_have_stock');
+            $table->string('photo');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
 
             $table->foreign('warteg_id')
@@ -27,6 +30,7 @@ class CreateMenusTable extends Migration
                 ->on('wartegs')
                 ->onDelete('no action')
                 ->onUpdate('cascade');
+
 
             $table->softDeletes();
         });
