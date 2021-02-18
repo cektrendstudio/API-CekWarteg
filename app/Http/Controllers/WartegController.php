@@ -13,6 +13,22 @@ class WartegController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(){
+
+    }
+
+    public function edit($id){
+
+    }
+
+    public function destroy($id){
+
+    }
+
+    public function show($id){
+
+    }
+
     public function create(){
         return view('warteg.create');
     }
