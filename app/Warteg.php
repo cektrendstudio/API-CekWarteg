@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Warteg extends Model
+
+class Warteg extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
+    protected $table = 'wartegs';
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +36,13 @@ class Warteg extends Model
     public function menu()
     {
         return $this->hasMany(Menu::class);
+    }
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
     }
 
 
