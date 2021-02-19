@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class WartegApiController extends Controller
 {
     public function index(){
-        $warteg = Warteg::where('is_active', true)->get();
+        $warteg = Warteg::with('menu')->get();
 
         return response()->json([
             'isSuccess' => true,
@@ -70,7 +70,7 @@ class WartegApiController extends Controller
     public function show($id)
     {
 
-        $warteg = Warteg::where('id', $id)->where('is_active', true)->get();
+        $warteg = Warteg::where('id', $id)->with('menu')->first();
 
         return response()->json([
             'isSuccess' => true,

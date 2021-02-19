@@ -15,7 +15,7 @@ class Warteg extends Model
      * @var array
      */
     protected $fillable = [
-        'code', 'name', 'owner_name', 'address', 'phone', 'description', 'photo_profile', 'username', 'password', 'is_active',
+        'code', 'name', 'owner_name', 'address', 'phone', 'description', 'photo_profile', 'username', 'password',
     ];
 
 
@@ -25,6 +25,13 @@ class Warteg extends Model
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'is_active',
     ];
+
+    public function menu()
+    {
+        return $this->hasMany(Menu::class);
+    }
+
+
 }
