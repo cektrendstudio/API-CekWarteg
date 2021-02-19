@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MenuApiController;
 use App\Http\Controllers\Api\WartegApiController;
 use Illuminate\Http\Request;
 
@@ -22,3 +23,7 @@ Route::get('/warteg',[WartegApiController::class, 'index']);
 Route::post('/warteg/create',[WartegApiController::class, 'create']);
 Route::get('/warteg/{id}',[WartegApiController::class, 'show']);
 Route::post('/warteg/{id}/update',[WartegApiController::class, 'update']);
+
+
+Route::get('/menu',[MenuApiController::class, 'index']);
+Route::get('/menu/{id}',[MenuApiController::class, 'show']);
