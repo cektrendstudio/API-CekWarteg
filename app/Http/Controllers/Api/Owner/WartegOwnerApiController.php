@@ -38,7 +38,7 @@ class WartegOwnerApiController extends Controller
             ],400);
         }
 
-        $photo = $request->file('photo') == null ? $warteg->photo:ENV('BASE_IMAGE') .$request->file('photo')->store('wartegs', 'public');
+        $photo = $request->file('photo') == null ? $warteg->photo_profile:ENV('BASE_IMAGE') .$request->file('photo')->store('wartegs', 'public');
 
         try{
             $warteg->update([
