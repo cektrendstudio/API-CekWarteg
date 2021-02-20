@@ -72,7 +72,7 @@ class MenuWartegOwnerApiController extends Controller
     public function update(Request $request, $id)
     {
         //find post by ID
-        $menu = Menu::findOrFail($id);
+        $menu = Menu::find($id);
 
         if(!$menu) {
 
@@ -122,5 +122,34 @@ class MenuWartegOwnerApiController extends Controller
                 'message' => 'Ops failed update menu ' . $exception->getCode(),
             ], 500);
         }
+    }
+
+    public function delete($id)
+    {
+        $menu = Menu::find($id);
+
+        if($menu){
+            try{
+                $menu->delete();
+                return response()->json([
+                    'isSuccess' => true,
+                    'messages'   => 'Success delete menu!',
+                    'data'  => $menu,
+                ],201);
+
+            }catch (QueryException $exception){
+                return response()->json([
+                    'isSuccess' => false,
+                    'messages'   => 'failed to delete menu! ' . $exception->getCode(),
+                    'data'  => $menu,
+                ],201);
+            }
+
+        }
+
+        return response()->json([
+            'isSuccess' => false,
+            'messages'  => 'Unknown menu'
+        ],400);
     }
 }
