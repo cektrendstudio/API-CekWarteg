@@ -24,7 +24,6 @@ class MenuApiController extends Controller
         $menu = Menu::where('id', $id)->with('warteg')->first();
         return response()->json([
             'isSuccess' => true,
-            'elements'  => $menu->count(),
             'data' => $menu
         ],200);
     }
