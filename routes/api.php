@@ -17,26 +17,23 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::get('/warteg',[WartegApiController::class, 'index']);
 Route::post('/warteg/create',[WartegApiController::class, 'create']);
 Route::get('/warteg/{id}',[WartegApiController::class, 'show']);
-Route::post('/warteg/{id}/update',[WartegApiController::class, 'update']);
+Route::middleware('jwt.verify')->post('/warteg/{id}/update',[WartegApiController::class, 'update']);
 
 
 Route::get('/menu',[MenuApiController::class, 'index']);
 Route::get('/menu/{id}',[MenuApiController::class, 'show']);
 Route::middleware('jwt.verify')->post('/menu/create',[MenuWartegOwnerApiController::class, 'create']);
 Route::middleware('jwt.verify')->post('/menu/{id}/update',[MenuWartegOwnerApiController::class, 'update']);
+Route::middleware('jwt.verify')->post('/menu/{id}/delete',[MenuWartegOwnerApiController::class, 'delete']);
 
 Route::group(['prefix' => 'auth'], function ($router) {
-
-    Route::post('login', [AuthOwnerApiController::class, 'login']);
+    Route::post('login', [AuthOwnerApiController::class, 'index']);
     Route::post('logout', [AuthOwnerApiController::class, 'logout']);
     Route::get('me', [AuthOwnerApiController::class, 'me']);
-    Route::get('/', [AuthOwnerApiController::class, 'index']);
+    Route::post('/', [AuthOwnerApiController::class, 'index']);
 
 });
