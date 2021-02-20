@@ -20,8 +20,7 @@ class JwtMiddleware extends BaseMiddleware
      */
     public function handle($request, Closure $next)
     {
-        Config::set('jwt.user', 'App\Warteg');
-        Config::set('auth.providers.users.model', \App\Warteg::class);
+
 
         if(empty($request->header('Authorization'))){
             return response()->json([

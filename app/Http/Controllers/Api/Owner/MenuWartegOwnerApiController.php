@@ -37,6 +37,8 @@ class MenuWartegOwnerApiController extends Controller
         }
 
 
+
+
         try{
 
             $create = Menu::create([
@@ -72,12 +74,12 @@ class MenuWartegOwnerApiController extends Controller
     public function update(Request $request, $id)
     {
         //find post by ID
-        $menu = Menu::find($id);
+        $menu = Menu::where('id',$id)->where('warteg_id', auth('api')->user()->id)->first();
 
         if(!$menu) {
 
             return response()->json([
-                'success' => false,
+                'isSuccess' => false,
                 'message' => 'Menu Not Found',
             ], 404);
 
@@ -105,20 +107,19 @@ class MenuWartegOwnerApiController extends Controller
             $menu->update([
                 'name'  => $request->name,
                 'description' => $request->description,
-                'warteg_id' => auth('api')->user()->id,
                 'price'=> $request->price,
                 'is_have_stock'=> $request->isHaveStock,
                 'photo' => $photo,
             ]);
 
             return response()->json([
-                'success' => false,
+                'isSuccess' => true,
                 'message' => 'Success updated menu!',
                 'data'  => $menu,
             ], 201);
         }catch (QueryException $exception){
             return response()->json([
-                'success' => false,
+                'isSuccess' => false,
                 'message' => 'Ops failed update menu ' . $exception->getCode(),
             ], 500);
         }

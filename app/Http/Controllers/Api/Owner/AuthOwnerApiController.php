@@ -20,8 +20,6 @@ class AuthOwnerApiController extends Controller
 
     public function index(Request $request)
     {
-        Config::set('jwt.user', 'App\Warteg');
-        Config::set('auth.providers.users.model', \App\Warteg::class);
 
         $validator = Validator::make($request->all(), [
             'username' => 'required',
@@ -55,8 +53,6 @@ class AuthOwnerApiController extends Controller
      */
     public function me()
     {
-        Config::set('jwt.user', 'App\Warteg');
-        Config::set('auth.providers.users.model', \App\Warteg::class);
 
         return response()->json([
             "isSuccess" => true,
