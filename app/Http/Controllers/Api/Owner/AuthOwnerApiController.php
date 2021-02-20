@@ -13,15 +13,12 @@ class AuthOwnerApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.verify', ['except' => ['login']]);
+        $this->middleware('jwt.verify', ['except' => ['index']]);
 
 
     }
-    public function index(){
-        return response()->json(['tset' => 1],200);
-    }
 
-    public function login(Request $request)
+    public function index(Request $request)
     {
         Config::set('jwt.user', 'App\Warteg');
         Config::set('auth.providers.users.model', \App\Warteg::class);
