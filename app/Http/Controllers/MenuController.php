@@ -35,7 +35,7 @@ class MenuController extends Controller
         $menu->warteg_id = $request->warteg_id;
         $menu->price = $request->price;
         $menu->is_have_stock = $request->is_have_stock;
-        $menu->photo =  $request->file('photo')->store('menus', 'public');
+        $menu->photo =  ENV('BASE_IMAGE') .$request->file('photo')->store('menus', 'public');
         $menu->save();
 
         return redirect()->route('menu.create');

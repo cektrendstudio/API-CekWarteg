@@ -57,7 +57,7 @@ class WartegController extends Controller
         $warteg->address = $request->address;
         $warteg->phone = $request->phone;
         $warteg->description = $request->description;
-        $warteg->photo_profile =  $request->file('photo')->store('wartegs', 'public');
+        $warteg->photo_profile =  ENV('BASE_IMAGE') .$request->file('photo')->store('wartegs', 'public');
         $warteg->save();
 
         return redirect()->route('warteg.index');
