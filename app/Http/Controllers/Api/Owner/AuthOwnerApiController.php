@@ -63,7 +63,7 @@ class AuthOwnerApiController extends Controller
 
         return response()->json([
             "isSuccess" => true,
-            "data"  =>  auth('api')->userOrFail(),
+            "data"  =>  auth('api')->user(),
         ],200);
     }
 
