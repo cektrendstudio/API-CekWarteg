@@ -75,4 +75,14 @@ class MenuApiController extends Controller
             ], 500);
         }
     }
+
+    public function menuByWarteg($id)
+    {
+        $menu = Menu::where('warteg_id', $id)->with('review')->get();
+        return response()->json([
+            'isSuccess' => true,
+            'elements'  => $menu->count(),
+            'data' => $menu
+        ],200);
+    }
 }

@@ -20,7 +20,7 @@ Route::group(['prefix' => 'warteg'], function ($router) {
 
 
 Route::group(['prefix' => 'menu'], function ($router) {
-
+    Route::get('warteg/{id}', [\App\Http\Controllers\Api\MenuApiController::class,'menuByWarteg']);
     Route::post('/{id}/review', [\App\Http\Controllers\Api\MenuApiController::class,'createReview']);
     Route::get('', [\App\Http\Controllers\Api\MenuApiController::class, 'index']);
     Route::get('/{id}', [\App\Http\Controllers\Api\MenuApiController::class, 'show']);
