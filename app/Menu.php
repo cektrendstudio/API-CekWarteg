@@ -15,18 +15,15 @@ class Menu extends Model
         'code', 'name', 'description','warteg_id', 'price', 'is_have_stock', 'photo',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'is_active',
-    ];
 
     public function warteg(){
         return $this->belongsTo(Warteg::class, 'warteg_id');
     }
+
+    protected $casts = [
+        'is_active' => 'boolean',
+        'is_have_stock' => 'boolean',
+    ];
 
 
 }
