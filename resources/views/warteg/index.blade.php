@@ -22,25 +22,36 @@
                         <th>Name</th>
                         <th>Owner Name</th>
                         <th>Phone</th>
+                        <th>Active</th>
+                        <th>Approve</th>
                         <th>Updated at</th>
+                        <th>Deleted</th>
                     </tr>
                     </thead>
                     <tbody>
                     @forelse($warteg as $item)
                         <tr>
                             <td>
-                                <a href="{{ route('warteg.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('warteg.edit', $item->id) }}" class="btn btn-xs btn-primary">Edit</a>
                                 <form class="d-inline" action="{{ route('warteg.destroy', $item->id) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <button  type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    <button  type="submit" class="btn btn-xs btn-danger">Delete</button>
+                                </form>
+                                <form class="d-inline" action="{{ route('approve', $item->id) }}" method="post">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
+                                    <button  type="submit" class="btn btn-xs btn-danger">Approve</button>
                                 </form>
                             </td>
                             <td>{{ $item->code }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->owner_name }}</td>
                             <td>{{ $item->phone }}</td>
+                            <td>{{ $item->is_active ? 'Yes':'No' }}</td>
+                            <td>{{ $item->is_approve ? 'Yes':'No' }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->updated_at)->toFormattedDateString() }}</td>
+                            <td>{{ is_null($item->deleted_at) ? 'No': \Carbon\Carbon::parse($item->deleted_at)->toFormattedDateString()}}</td>
 
                         </tr>
                     @empty

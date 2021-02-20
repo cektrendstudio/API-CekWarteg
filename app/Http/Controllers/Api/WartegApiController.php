@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Validator;
 class WartegApiController extends Controller
 {
     public function index(){
-        $warteg = Warteg::where('is_active', true)->where('is_approve', true)->whereNotNull('name')->whereNotNull('photo_profile')->get();
-
+        $warteg = Warteg::where('is_approve', true)->whereNotNull('name')->whereNotNull('photo_profile')->get();
         return response()->json([
             'isSuccess' => true,
-            'data' => $warteg
+            'data' => $warteg,
+            'elements'  => count($warteg)
         ],200);
     }
 
@@ -100,7 +100,7 @@ class WartegApiController extends Controller
         }
 
         //find post by ID
-        $warteg = Warteg::findOrFail($id);
+        $warteg = Warteg::find($id);
 
         if(!$warteg) {
 

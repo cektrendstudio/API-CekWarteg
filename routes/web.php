@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('user',UserController::class);
 Route::resource('warteg',WartegController::class);
 Route::resource('menu',MenuController::class);
+
+Route::put('/approve/{id}', [\App\Http\Controllers\WartegController::class, 'approve'])->name('approve');
+

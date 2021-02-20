@@ -14,7 +14,7 @@ class WartegController extends Controller
     }
 
     public function index(){
-        $warteg = Warteg::where('is_active', true)->get();
+        $warteg = Warteg::withTrashed()->get();
         return view('warteg.index', compact('warteg'));
     }
 
@@ -25,6 +25,7 @@ class WartegController extends Controller
     public function destroy($id){
         $warteg = Warteg::where('id', $id)->first();
         $warteg->is_active = false;
+        $warteg->delete();
         $warteg->save();
 
         return redirect()->route('warteg.index');
@@ -40,12 +41,13 @@ class WartegController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'username'  => 'required|string|min:6',
-            'password'  => 'required|string|min:6',
-            'ownerName' => 'required|string|min:3',
+            'username'  => 'required|string|min:6|unique:wartegs,username',
+            'password'  => 'required|string|min:8',
+            'ownerName' => 'required|string',
+            'email' => 'required|string|email|unique:wartegs,email',
             'address'   => 'required|string|min:8',
             'phone'  => 'required',
-            'photo'  => 'required',
+            'photo'  => 'required|image',
         ]);
 
         $warteg = new Warteg();
@@ -57,8 +59,21 @@ class WartegController extends Controller
         $warteg->address = $request->address;
         $warteg->phone = $request->phone;
         $warteg->description = $request->description;
+        $warteg->email = $request->email;
         $warteg->photo_profile =  ENV('BASE_IMAGE') .$request->file('photo')->store('wartegs', 'public');
         $warteg->save();
+
+        return redirect()->route('warteg.index');
+    }
+
+    public function approve($id)
+    {
+        $warteg = Warteg::findOrFail($id);
+        if($warteg->is_active && !$warteg->is_approve){
+            $warteg->update([
+                'is_approve'    => true,
+            ]);
+        }
 
         return redirect()->route('warteg.index');
     }
