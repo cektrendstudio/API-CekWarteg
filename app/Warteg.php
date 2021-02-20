@@ -20,7 +20,7 @@ class Warteg extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'code', 'name', 'owner_name', 'address', 'phone', 'description', 'photo_profile', 'username', 'password',
+        'code', 'name', 'owner_name', 'address', 'phone', 'description', 'photo_profile', 'username', 'password', 'email', 'is_approve', 'is_active',
     ];
 
 
@@ -30,7 +30,12 @@ class Warteg extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'is_active',
+        'password',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+        'is_approve' => 'boolean',
     ];
 
     public function menu()
