@@ -15,7 +15,7 @@ Route::group(['prefix' => 'warteg'], function ($router) {
     Route::get('', [\App\Http\Controllers\Api\WartegApiController::class, 'index']);
     Route::post('/create', [\App\Http\Controllers\Api\WartegApiController::class, 'create']);
     Route::get('/{id}', [\App\Http\Controllers\Api\WartegApiController::class, 'show']);
-    Route::middleware('jwt.verify')->post('/{id}/update', [\App\Http\Controllers\Api\Owner\WartegOwnerApiController::class, 'update']);
+    Route::middleware('jwt.verify')->post('/update', [\App\Http\Controllers\Api\Owner\WartegOwnerApiController::class, 'update']);
 });
 
 
