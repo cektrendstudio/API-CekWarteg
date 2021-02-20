@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Validator;
 
 class WartegOwnerApiController extends Controller
 {
-    public function update(Request $request, Warteg $warteg, $id)
+    public function update(Request $request, Warteg $warteg)
     {
-        $warteg = Warteg::find($id);
+        $warteg = Warteg::find(auth('api')->user()->id);
 
         if(!$warteg){
             return response()->json([
