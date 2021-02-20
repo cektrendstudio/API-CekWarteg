@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class WartegApiController extends Controller
 {
     public function index(){
-        $warteg = Warteg::with('menu')->get();
+        $warteg = Warteg::where('is_active', true)->where('is_approve', true)->whereNotNull('name')->whereNotNull('photo_profile')->get();
 
         return response()->json([
             'isSuccess' => true,
@@ -24,14 +24,10 @@ class WartegApiController extends Controller
     public function create(Request $request){
         $validator = Validator::make(
             $request->all(), [
-                'name'  => 'required|string|min:6',
-                'username'  => 'required|string|min:6',
-                'password'  => 'required|string|min:6',
-                'ownerName' => 'required|string|min:3',
-                'address'   => 'required|string|min:8',
-                'description'  => 'required|string|min:6',
-                'phone'  => 'required',
-                'photo' => 'required'
+                'username'  => 'required|string|min:6|unique:wartegs,username',
+                'password'  => 'required|string|min:8',
+                'ownerName' => 'required|string',
+                'email' => 'required|string|email|unique:wartegs,email',
             ]
         );
 
@@ -48,12 +44,8 @@ class WartegApiController extends Controller
                     "username" => strtolower(preg_replace('/\s+/', '', $request->username)),
                     "password" => Hash::make($request->password),
                     "code" => "WTG" . time(),
-                    "name" => $request->name,
                     "owner_name" => $request->ownerName,
-                    "address" => $request->address,
-                    "phone" => $request->phone,
-                    "description" => $request->description,
-                    "photo_profile" => ENV('BASE_IMAGE') .$request->file('photo')->store('wartegs', 'public'),
+                    "email" => $request->email,
                 ]);
 
             if($create){
@@ -81,7 +73,7 @@ class WartegApiController extends Controller
     public function show($id)
     {
 
-        $warteg = Warteg::where('id', $id)->with('menu')->first();
+        $warteg = Warteg::where('id', $id)->whereNotNull('name')->whereNotNull('photo_profile')->with('menu')->first();
 
         return response()->json([
             'isSuccess' => true,
