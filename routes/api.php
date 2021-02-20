@@ -30,6 +30,7 @@ Route::post('/warteg/{id}/update',[WartegApiController::class, 'update']);
 Route::get('/menu',[MenuApiController::class, 'index']);
 Route::get('/menu/{id}',[MenuApiController::class, 'show']);
 Route::middleware('jwt.verify')->post('/menu/create',[MenuWartegOwnerApiController::class, 'create']);
+Route::middleware('jwt.verify')->post('/menu/{id}/update',[MenuWartegOwnerApiController::class, 'update']);
 
 Route::group(['prefix' => 'auth'], function ($router) {
 
