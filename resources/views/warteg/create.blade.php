@@ -28,7 +28,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="username">Username:</label>
-                        <input class="form-control" id="username" name="username" type="text" placeholder="Enter a username here... " value="{{ old('username') }}" required/>
+                        <input class="form-control" id="username" name="username" type="text" placeholder="Enter a username here... "  required/>
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
@@ -36,27 +36,31 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input class="form-control" id="name" name="name" type="text"  placeholder="Enter a name of warteg here... " required/>
+                        <input class="form-control" id="name" name="name" type="text"  placeholder="Enter a name of warteg here... " value="{{ old('name') }}" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input class="form-control" id="email" name="email" type="email"  placeholder="Enter a email of warteg here... "  required/>
                     </div>
                     <div class="form-group">
                         <label for="ownerName">Owner Name:</label>
-                        <input class="form-control" id="ownerName" name="ownerName" type="text"  placeholder="Enter a name of owner warteg here... " required/>
+                        <input class="form-control" id="ownerName" name="ownerName" type="text"  placeholder="Enter a name of owner warteg here... " value="{{ old('ownerName') }}"  required/>
                     </div>
                     <div class="form-group">
                         <label for="address">Address:</label>
-                        <textarea class="form-control" id="address" name="address" placeholder="Enter address of warteg here..." required></textarea>
+                        <textarea class="form-control" id="address" name="address" placeholder="Enter address of warteg here..."  required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Enter description of warteg here..." required></textarea>
+                        <textarea class="form-control" id="description" name="description" placeholder="Enter description of warteg here..."   required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone:</label>
-                        <input class="form-control" id="phone" name="phone" type="number"  placeholder="Enter a number phone of warteg here... " required/>
+                        <input class="form-control" id="phone" name="phone" type="number"  placeholder="Enter a number phone of warteg here... " value="{{ old('phone') }}"  required/>
                     </div>
                     <div class="form-group">
                         <label for="photo">Photo:</label>
-                        <input class="form-control" id="photo" name="photo" type="file" required/>
+                        <input class="form-control" id="photo" name="photo" type="file" accept="image/*" required/>
                     </div>
 
                     <div class="form-group">
