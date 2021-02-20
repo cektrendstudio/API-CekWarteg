@@ -16,14 +16,16 @@ class CreateWartegsTable extends Migration
         Schema::create('wartegs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code')->unique();
-            $table->string('name');
+            $table->string('name')->nullable();
+            $table->string('email')->unique();
             $table->string('owner_name');
-            $table->text('address');
-            $table->string('phone', 20);
-            $table->text('description');
-            $table->string('photo_profile');
+            $table->text('address')->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->text('description')->nullable();
+            $table->string('photo_profile')->nullable();
             $table->string('username')->unique();
             $table->string('password');
+            $table->boolean('is_approve')->default(false);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
