@@ -1,11 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\MenuApiController;
-use App\Http\Controllers\Api\Owner\AuthOwnerApiController;
-use App\Http\Controllers\Api\Owner\MenuWartegOwnerApiController;
-use App\Http\Controllers\Api\WartegApiController;
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,23 +11,28 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::group(['prefix' => 'warteg'], function ($router) {
+    Route::get('', [\App\Http\Controllers\Api\WartegApiController::class, 'index']);
+    Route::post('/create', [\App\Http\Controllers\Api\WartegApiController::class, 'create']);
+    Route::get('/{id}', [\App\Http\Controllers\Api\WartegApiController::class, 'show']);
+    Route::middleware('jwt.verify')->post('/update', [\App\Http\Controllers\Api\Owner\WartegOwnerApiController::class, 'update']);
+});
 
-Route::get('/warteg',[WartegApiController::class, 'index']);
-Route::post('/warteg/create',[WartegApiController::class, 'create']);
-Route::get('/warteg/{id}',[WartegApiController::class, 'show']);
-Route::middleware('jwt.verify')->post('/warteg/{id}/update',[WartegApiController::class, 'update']);
 
+Route::group(['prefix' => 'menu'], function ($router) {
+    Route::get('warteg/{id}', [\App\Http\Controllers\Api\MenuApiController::class,'menuByWarteg']);
+    Route::post('/{id}/review', [\App\Http\Controllers\Api\MenuApiController::class,'createReview']);
+    Route::get('', [\App\Http\Controllers\Api\MenuApiController::class, 'index']);
+    Route::get('/{id}', [\App\Http\Controllers\Api\MenuApiController::class, 'show']);
+    Route::middleware('jwt.verify')->post('/create', [\App\Http\Controllers\Api\Owner\MenuWartegOwnerApiController::class, 'create']);
+    Route::middleware('jwt.verify')->post('{id}/update', [\App\Http\Controllers\Api\Owner\MenuWartegOwnerApiController::class, 'update']);
+    Route::middleware('jwt.verify')->post('/{id}/delete', [\App\Http\Controllers\Api\Owner\MenuWartegOwnerApiController::class, 'delete']);
 
-Route::get('/menu',[MenuApiController::class, 'index']);
-Route::get('/menu/{id}',[MenuApiController::class, 'show']);
-Route::middleware('jwt.verify')->post('/menu/create',[MenuWartegOwnerApiController::class, 'create']);
-Route::middleware('jwt.verify')->post('/menu/{id}/update',[MenuWartegOwnerApiController::class, 'update']);
-Route::middleware('jwt.verify')->post('/menu/{id}/delete',[MenuWartegOwnerApiController::class, 'delete']);
-
+});
 Route::group(['prefix' => 'auth'], function ($router) {
-    Route::post('login', [AuthOwnerApiController::class, 'index']);
-    Route::post('logout', [AuthOwnerApiController::class, 'logout']);
-    Route::get('me', [AuthOwnerApiController::class, 'me']);
-    Route::post('/', [AuthOwnerApiController::class, 'index']);
+    Route::post('login', [\App\Http\Controllers\Api\Owner\AuthOwnerApiController::class, 'index']);
+    Route::post('logout', [\App\Http\Controllers\Api\Owner\AuthOwnerApiController::class, 'logout']);
+    Route::get('me', [\App\Http\Controllers\Api\Owner\AuthOwnerApiController::class, 'me']);
+    Route::post('/', [\App\Http\Controllers\Api\Owner\AuthOwnerApiController::class, 'index']);
 
 });

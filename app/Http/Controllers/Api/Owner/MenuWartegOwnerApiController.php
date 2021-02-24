@@ -19,13 +19,14 @@ class MenuWartegOwnerApiController extends Controller
 
     public function create(Request $request)
     {
+        $defaultPhoto = "https://cintaihidup.com/wp-content/uploads/2017/05/17596688_1224042657715403_9172816067007873024_n-700x700.jpg";
         $validator = Validator::make(
             $request->all(), [
                 'name'  => 'required|string',
                 'description'  => 'required|string|min:8',
                 'price' => 'required|numeric',
                 'isHaveStock' => 'required|boolean',
-                'photo' => 'required|image',
+//                'photo' => 'required|image',
             ]
         );
 
@@ -37,6 +38,8 @@ class MenuWartegOwnerApiController extends Controller
         }
 
 
+
+
         try{
 
             $create = Menu::create([
@@ -46,7 +49,7 @@ class MenuWartegOwnerApiController extends Controller
                 'warteg_id' => auth('api')->user()->id,
                 'price'=> $request->price,
                 'is_have_stock'=> $request->isHaveStock,
-                'photo' => ENV('BASE_IMAGE') .$request->file('photo')->store('menus', 'public'),
+                'photo' => $request->file('photo') == null ? $defaultPhoto : $request->file('photo')->store('menus', 'public'),
             ]);
 
             if($create){
@@ -72,12 +75,12 @@ class MenuWartegOwnerApiController extends Controller
     public function update(Request $request, $id)
     {
         //find post by ID
-        $menu = Menu::find($id);
+        $menu = Menu::where('id',$id)->where('warteg_id', auth('api')->user()->id)->first();
 
         if(!$menu) {
 
             return response()->json([
-                'success' => false,
+                'isSuccess' => false,
                 'message' => 'Menu Not Found',
             ], 404);
 
@@ -105,20 +108,19 @@ class MenuWartegOwnerApiController extends Controller
             $menu->update([
                 'name'  => $request->name,
                 'description' => $request->description,
-                'warteg_id' => auth('api')->user()->id,
                 'price'=> $request->price,
                 'is_have_stock'=> $request->isHaveStock,
                 'photo' => $photo,
             ]);
 
             return response()->json([
-                'success' => false,
+                'isSuccess' => true,
                 'message' => 'Success updated menu!',
                 'data'  => $menu,
             ], 201);
         }catch (QueryException $exception){
             return response()->json([
-                'success' => false,
+                'isSuccess' => false,
                 'message' => 'Ops failed update menu ' . $exception->getCode(),
             ], 500);
         }

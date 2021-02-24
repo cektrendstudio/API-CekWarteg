@@ -19,7 +19,8 @@ class Menu extends Model
     ];
 
 
-    public function warteg(){
+    public function warteg()
+    {
         return $this->belongsTo(Warteg::class, 'warteg_id');
     }
 
@@ -28,5 +29,9 @@ class Menu extends Model
         'is_have_stock' => 'boolean',
     ];
 
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
 
 }
