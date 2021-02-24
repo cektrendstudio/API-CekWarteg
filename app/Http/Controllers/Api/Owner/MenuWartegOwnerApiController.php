@@ -49,7 +49,7 @@ class MenuWartegOwnerApiController extends Controller
                 'warteg_id' => auth('api')->user()->id,
                 'price'=> $request->price,
                 'is_have_stock'=> $request->isHaveStock,
-                'photo' => $request->file('photo') == null ? $defaultPhoto : $request->file('photo')->store('menus', 'public'),
+                'photo' => $request->file('photo') == null ? $defaultPhoto : ENV('BASE_IMAGE') .$request->file('photo')->store('menus', 'public'),
             ]);
 
             if($create){
