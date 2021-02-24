@@ -90,6 +90,7 @@ class AuthOwnerApiController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
+	    'isSuccess' => true,
             'access_token' => "Bearer " . $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
